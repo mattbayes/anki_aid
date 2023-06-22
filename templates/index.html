@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Build
+{% endblock %}
+
+{% block main %}
+    <div class="flex-row test">
+        <nav id="main-nav" class="nav-wheel">
+            <a href="{{ url_for('card_builder', selected_language='japanese') }}" class="segment">
+                <img class="segment-img" src="{{ url_for('static', filename='assets/flags/japanese_flag.svg') }}">
+            </a>
+            <a href="{{ url_for('card_builder', selected_language='mandarin') }}" class="segment">
+                <img class="segment-img" src="{{ url_for('static', filename='assets/flags/chinese_flag.svg')}}" />
+            </a>
+        </nav>
+    </div>
+{% endblock %}

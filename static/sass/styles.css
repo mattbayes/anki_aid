@@ -1,0 +1,717 @@
+/* Font variables */
+/* Mobile */
+:root {
+  --fs-lg: 1.5rem;
+  --fs-med: 1.25rem;
+  --fs-stand: 1rem;
+}
+
+/* Tablet */
+@media only screen and (min-width: 481px) {
+  :root {
+    --fs-lg: 2.25rem;
+    --fs-med: 1.75rem;
+    --fs-stand: 1.25rem;
+  }
+}
+/* Medium screens */
+@media only screen and (min-width: 769px) {
+  :root {
+    --fs-lg: 2.5rem;
+    --fs-med: 2rem;
+    --fs-stand: 1rem;
+  }
+}
+/* Desktop */
+@media only screen and (min-width: 1025px) {
+  :root {
+    --fs-lg: 2.75rem;
+    --fs-med: 2.25rem;
+    --fs-stand: 1.25rem;
+  }
+}
+/* Global styling */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  font-family: Arial;
+}
+
+h1, h2, h3, h4 {
+  font-variant: small-caps;
+  font-weight: bold;
+  color: #DFF0FB;
+}
+
+/* Heading specific styling */
+h1 {
+  font-size: var(--fs-lg);
+}
+
+h2 {
+  font-size: var(--fs-med);
+}
+
+h3 {
+  color: #DFF0FB;
+}
+
+p, span {
+  margin-bottom: 1em;
+  font-size: var(--fs-stand);
+}
+
+a {
+  color: #DFF0FB;
+  text-decoration: none;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+/* Structure */
+html, body {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Overall site structure */
+.grid-container {
+  display: grid;
+  width: 100%;
+  height: 100vh;
+  grid-template-areas: "header header header header header header header header header header header header" "main main main main main main main main main main main main" "footer footer footer footer footer footer footer footer footer footer footer footer";
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto 1fr auto;
+}
+
+/* Set section to flex column */
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 0em;
+}
+
+/*Set section to flex row */
+.flex-row {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+/* SECTIONS */
+/* Header section */
+#header {
+  grid-area: header;
+  background-color: #1A1D27;
+  margin-bottom: 5vh;
+  width: 100%;
+}
+
+/* 'Ankimate' image in header section */
+#logo {
+  max-width: 100%;
+  max-height: 8vh;
+  padding: 0 0.5rem;
+}
+
+/* Main section */
+#main {
+  grid-area: main;
+  grid-column: 1/13;
+}
+
+/* Footer */
+#footer {
+  grid-area: footer;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: fit-content;
+  margin-top: 1rem;
+  padding: 0.25em;
+  background-color: #1A1D27;
+  color: #DFF0FB;
+}
+
+#foot-left {
+  grid-column: 1/2;
+  place-self: center start;
+}
+
+#foot-nav {
+  grid-column: 2/3;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+@media only screen and (min-width: 481px) {
+  #foot-nav {
+    flex-direction: row;
+  }
+}
+.foot-nav-itm {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  padding: 1rem;
+  text-decoration: none;
+  color: #DFF0FB;
+  margin: 0 0.5rem;
+  text-transform: uppercase;
+}
+
+.highlight {
+  height: 100%;
+  width: 0%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  transition: 0.5s ease;
+}
+
+.foot-nav-itm:hover > .highlight {
+  background-color: #0084DD;
+  width: 100%;
+  text-decoration: underline;
+}
+
+.nav-wheel {
+  position: relative;
+  width: 40vh;
+  height: 40vh;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 50%;
+  list-style: none;
+  box-shadow: 0 0 5px 5px lightgrey;
+  transition: 0.5s ease;
+}
+
+@media only screen and (min-width: 481px) {
+  .nav-wheel {
+    width: 70vh;
+    height: 70vh;
+  }
+}
+.nav-wheel:hover {
+  transform: scale(1.05);
+}
+
+#center-button {
+  position: absolute;
+  top: 33%;
+  right: 33%;
+  transform-origin: 0% 100%;
+  z-index: 2;
+  border-radius: 50%;
+  width: 35%;
+  height: 35%;
+  transition: 0.5s ease;
+  background-color: lightgray;
+}
+
+#center-button:hover {
+  top: 34%;
+  right: 34%;
+  transform: scale(1.1);
+}
+
+.center-button-img {
+  height: 100%;
+}
+
+.segment {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform-origin: 0% 100%;
+  overflow: hidden;
+  width: 50%;
+  height: 50%;
+  transition: 0.5s ease;
+  filter: brightness(75%);
+}
+
+.segment:nth-child(1) {
+  height: 100%;
+  background-color: lightblue;
+}
+
+.segment:nth-child(1) .segment-img {
+  height: 100%;
+}
+
+.segment:nth-child(2) {
+  transform: rotate(180deg);
+  background-color: lightseagreen;
+}
+
+.segment:nth-child(2) .segment-img {
+  transform: rotate(-180deg);
+  height: 100%;
+}
+
+.segment:nth-child(3) {
+  transform: rotate(-90deg);
+}
+
+.segment:nth-child(3) .segment-img {
+  height: 175%;
+}
+
+.segment:hover {
+  filter: brightness(100%);
+  box-shadow: 0 0 5px 5px #DFF0FB;
+  z-index: 1;
+}
+
+/* Set scroll to always on (Stops bar popping in on About page when expanding collapsible elements) */
+/* Contact Page */
+.contact-item {
+  width: 70vw;
+  margin: 0.5em;
+  box-shadow: 0px 0px 2px #1A1D27;
+  border-radius: 3px;
+  padding: 1em;
+  font-size: var(--fs-stand);
+}
+
+/* Message flash */
+.success {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  min-width: 50%;
+  border-radius: 0.5em;
+  padding: 0.5em 0.75em;
+  background-color: rgba(40, 167, 69, 0.3);
+  text-align: center;
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  min-width: 50%;
+  border-radius: 0.5em;
+  padding: 0.5em 0.75em;
+  background-color: rgba(255, 99, 71, 0.6);
+  text-align: center;
+}
+
+/* ELEMENTS */
+/* Size Classes */
+.sml {
+  width: 150px;
+  height: 150px;
+  background-color: #1A1D27;
+  color: #DFF0FB;
+}
+
+.md {
+  width: 250px;
+  height: 200px;
+  margin: 0.5rem;
+}
+
+.lg {
+  width: 80%;
+}
+
+/*Page title element */
+.title {
+  margin-bottom: 1em;
+  border-radius: 5px;
+  box-shadow: 0px 0px 2px #1A1D27;
+  padding: 0.25em;
+  background-color: #1A1D27;
+  text-align: center;
+}
+
+/* Form elements */
+.tile-title {
+  background-color: #1A1D27;
+  color: #DFF0FB;
+  font-variant: small-caps;
+  text-align: center;
+  font-size: var(--fs-med);
+  border-radius: 30px 30px 0px 0px;
+  border-bottom: 2px solid #DFF0FB;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 80%;
+  font-weight: bold;
+  font-size: var(--fs-stand);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0px 0px 30px 30px;
+  background-color: #DFF0FB;
+  margin-bottom: 0.5rem;
+  color: #1A1D27;
+}
+
+/* Override default underline decoration of link */
+.tile:hover {
+  text-decoration: none;
+}
+
+/* Index Page */
+#jp, #cn {
+  font-size: var(--fs-lg);
+}
+
+/* Build Page Elements */
+/* Styling shared by input form (top) and download form (bottom) */
+#input, #download {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+/* Input form */
+.icon {
+  height: fit-content;
+  width: fit-content;
+  padding: 1rem;
+  font-weight: bold;
+  font-size: var(--fs-med);
+  text-align: center;
+  border-radius: 30px 30px;
+  margin-bottom: 2.5vh;
+}
+
+/* Set image to display */
+#upload-icon {
+  content: url("../assets/icons/icon_upload_black.svg");
+  width: 50%;
+  height: 65%;
+}
+
+/* Set image to on hover */
+label:hover > #upload-icon {
+  content: url("../assets/icons/icon_upload_light_blue.svg");
+}
+
+/* Results table */
+#output {
+  /* Hide table until AJAX call returns */
+  display: none;
+  width: 100%;
+  overflow-x: auto;
+}
+
+#results-table {
+  display: block;
+  max-width: 100%;
+  font-size: var(--fs-stand);
+  padding-bottom: 1rem;
+  margin: 1.5rem;
+}
+
+#results-table td {
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #1A1D27;
+  padding: 0.5em;
+  font-size: var(--fs-stand);
+}
+
+/* Empty cells push checkboxes into correct column */
+#results-table .empty-td {
+  border: none;
+}
+
+#results-table th {
+  font-size: var(--fs-stand);
+}
+
+#results-table .checkbox {
+  border: none;
+  vertical-align: middle;
+}
+
+#results-table input[type=checkbox] {
+  /* Cursor only appears when on checkbox */
+  cursor: pointer;
+  transform: scale(1.5);
+}
+
+/* All cells in 'word' column get background colour */
+#results-table td:nth-child(1) {
+  background-color: #1A1D27;
+  color: #DFF0FB;
+}
+
+/* Header for Results table and styling for first cell (word cell) in row */
+.result-header {
+  padding: 0.4rem;
+  padding-bottom: 0.5rem;
+  background-color: #1A1D27;
+  color: #DFF0FB;
+}
+
+/* Download form selects */
+#front, #back {
+  width: 90%;
+  height: 50%;
+  font-size: var(--fs-med);
+  text-align: center;
+  background-color: #DFF0FB;
+}
+
+/* Override flex-row to center plus and minus buttons */
+.center {
+  justify-content: center;
+}
+
+/* ABOUT PAGE */
+/* Collapsible elements */
+.box {
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.no-wrap {
+  flex-wrap: nowrap;
+}
+
+/* Button element of collapsible box */
+.box-header {
+  background-color: #DFF0FB;
+  text-align: center;
+}
+
+.header-left {
+  align-self: center;
+  width: 95%;
+  padding: 0.5em;
+  transition: 1s;
+}
+.header-left h2 {
+  color: #1A1D27;
+}
+
+.header-right {
+  width: fit-content;
+  padding: 0.5em;
+  border-left: 2px solid #DFF0FB;
+  background-color: #1A1D27;
+  font-size: var(--fs-med);
+  color: #DFF0FB;
+}
+
+.box-header:hover, .selected {
+  transition: 1s;
+  background: #1A1D27;
+}
+.box-header:hover h2, .selected h2 {
+  color: #DFF0FB;
+}
+
+.box-body {
+  max-height: 0;
+  background-color: #DFF0FB;
+  overflow-x: auto;
+  transition: max-height 0.5s ease-out;
+  /* Table styling in 'features' section */
+}
+.box-body a {
+  color: #0084DD;
+}
+.box-body a:hover {
+  color: #1A1D27;
+}
+.box-body ul {
+  margin: 1rem;
+  list-style-position: inside;
+}
+.box-body table {
+  max-width: 95%;
+  /* Centre table */
+  margin: 2em auto;
+  /* Make borders single */
+  border-collapse: collapse;
+}
+.box-body th {
+  text-align: center;
+  font-variant: small-caps;
+  background-color: #1A1D27;
+  color: #DFF0FB;
+}
+.box-body td, .box-body th {
+  box-shadow: 0px 0px 1px #1A1D27;
+  font-size: var(--fs-stand);
+}
+
+/* Adds margin to content, but prevents content showing */
+.box-body-content {
+  margin: 2rem;
+}
+
+/* User Interactions */
+.std-btn, .plus-minus-btn {
+  align-self: center;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  background-color: #1A1D27;
+  cursor: pointer;
+  font-variant: small-caps;
+  font-size: var(--fs-stand);
+  color: #DFF0FB;
+  transition: 0.3s;
+}
+
+.plus-minus-btn {
+  width: 50px;
+  font-size: var(--fs-med);
+}
+
+.std-btn:hover, .plus-minus-btn:hover {
+  transform: scale(1.1);
+}
+
+.pointer, input, select {
+  cursor: pointer;
+}
+
+.hover:hover {
+  background-color: #1A1D27;
+  color: #DFF0FB;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* User Feedback */
+@keyframes fetching {
+  0% {
+    color: #1A1D27;
+  }
+  25% {
+    content: ".";
+    color: #DFF0FB;
+  }
+  50% {
+    content: "..";
+    color: #DFF0FB;
+  }
+  75% {
+    content: "...";
+    color: #DFF0FB;
+  }
+  100% {
+    color: #1A1D27;
+  }
+}
+.fetching:after {
+  /*overflow: hidden;*/
+  display: inline-block;
+  vertical-align: bottom;
+  animation: fetching steps(4, end) 900ms infinite;
+  content: ".";
+  content: "..";
+  content: "...";
+  width: 0px;
+}
+
+:checked + label > img {
+  border: 2px solid #1A1D27;
+  border-radius: 5px;
+  padding: 1px;
+}
+
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25vw;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  padding: 0.5%;
+  border: 2px solid blue;
+}
+
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.flag {
+  width: 5vw;
+}
+
+.visible {
+  display: block;
+}
+
+.prev, .next {
+  color: black;
+  transition: 0.6s ease;
+}
+
+.settings-bar {
+  grid-row-start: 1;
+  grid-row-end: 5;
+  border: 2px solid black;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-self: left;
+  margin-left: 1rem;
+  background-color: #1A1D27;
+  color: white;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2%;
+  padding: 2%;
+  border: 2px solid white;
+}
+
+fieldset label {
+  text-transform: capitalize; /* override label uppercase */
+}
+
+legend {
+  padding: 0 1.5%;
+}
+
+input[type=radio] {
+  vertical-align: middle;
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
+label {
+  text-transform: uppercase;
+}
+
+#upload-label {
+  display: block;
+  height: 35px;
+  font-size: 1rem;
+}
+
+/*# sourceMappingURL=styles.css.map */

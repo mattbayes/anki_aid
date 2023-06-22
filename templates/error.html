@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Error
+{% endblock %}
+
+{% block main %}
+    <div id="error" class="flex-container">
+        <h2 class="title">Error: {{ error }}</h2>
+        <div class="text-content">
+            <h3>Description:</h3>
+            <p>{{ message }}: {{ description}}</p>
+        </div>
+    </div>
+{% endblock %}

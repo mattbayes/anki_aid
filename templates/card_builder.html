@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Card Builder
+{% endblock %}
+
+{% block main %}
+    <section class="settings-bar">
+    {% if language == 'japanese' %}
+        <img class="flag" src="{{ url_for('static', filename='assets/flags/jp_flag_round.svg') }}">
+    {% elif language == 'mandarin' %}
+        <img class="flag" src="{{ url_for('static', filename='assets/flags/cn_flag_round.svg') }}">
+    {% elif language == 'german' %}
+        <img class="flag" src="{{ url_for('static', filename='assets/flags/de_flag_round.svg') }}">
+    {% endif %}
+        <!--<fieldset>
+            <legend>Upload</legend>
+        <div style="width: 15%;">
+            <input name="file" type="file" value="file" id="actual-btn" hidden>
+            <label class="pointer hover" for="actual-btn">
+                <img id="upload-icon" src="{{ url_for('static', filename='assets/icons/icon_upload_black.svg') }}" alt="upload file icon"></img>
+                <p id="file-text" class="hover"></p>
+            </label>
+        </div>
+     </fieldset>-->
+    </section>
+    <div class="flex-col">
+        <!--DRY!!!!-->
+
+        {% if error %}
+            <p>TEST</p>
+        {% endif %}
+        
+        <form id="input" class="flex-col">
+            <section class="flex-row">
+                <div class="md">
+                    <div class="tile-title">
+                        Upload
+                    </div>
+                    <input name="file" type="file" value="file" id="actual-btn" hidden>
+                    <label class="tile pointer hover" for="actual-btn">
+                        <img id="upload-icon" src="{{ url_for('static', filename='assets/icons/icon_upload_black.svg') }}" alt="upload file icon"></img>
+                        <p id="file-text" class="hover"></p>
+                    </label>            
+                </div>
+                <div class="md">
+                    <div class="tile-title">
+                        Translation
+                    </div>
+                    <div class="tile">
+                        <fieldset class="flex-row" name="trans">
+                            <input id="off" type="radio" name="trans" value="none" checked hidden>
+                            <label for="off" type="radio">
+                                <img src="{{ url_for('static', filename='assets/icons/radio_no_translation.svg') }}" alt="translation off" />
+                            </label>
+                            <input id="on" type="radio" name="trans" value="en" hidden>
+                            <label for="on" type="radio">
+                                <img src="{{ url_for('static', filename='assets/icons/radio_translation.svg') }}" alt="translation on">
+                            </label>
+                        </fieldset>
+                    </div>
+                </div>
+            </section>
+            <button class="std-btn" type="submit">Get sentences</button>
+        </form>
+        <section class="lg">
+            <div class="tile-title">
+                Sentences
+            </div>
+            <div class="tile">
+                <p id="placeholder-text">Your sentences will appear here.</p>
+                <p id="progress" class="fetching" hidden></p>           
+                <form id="output">
+                    <table id="results-table">
+                        <thead>
+                            <tr>
+                                <th><h3 class="result-header">Word</h3></th>
+                                <th><h3 class="result-header">Sentence</h3></th>
+                                <th><h3 id="trans"></h3></th>
+                                <th><button id="reload-btn" class="std-btn">Reload</button></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <!--Populated with Ajax response-->
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </section>
+        <form id="download" class="flex-col" action="/download" method="post">
+            <div id="fields" class="flex-row">
+                <div class="md">
+                    <div class="tile-title">
+                        Front
+                    </div>
+                    <div class="tile">
+                        <select id="front" name="front" aria-label="output_fields for card front">
+                            {% for field in output_fields %}
+                                {% if field == "sentence" %}
+                                    <option value="{{ output_fields[loop.index - 1] }}" selected>{{ output_fields[loop.index - 1].capitalize() }}</option>
+                                {% else %}
+                                    <option value="{{ output_fields[loop.index - 1] }}">{{ output_fields[loop.index - 1].capitalize() }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="md">
+                    <div class="tile-title" aria-label="output_fields for card back">
+                        Back
+                    </div>    
+                    <div class="tile">
+                        <select id="back" name="back">
+                            {% for field in output_fields %}
+                                {% if field == "transcription" %}
+                                    <option value="{{ output_fields[loop.index - 1] }}" selected>{{output_fields[loop.index - 1].capitalize() }}</option>
+                                {% else %}
+                                    <option value="{{ output_fields[loop.index - 1] }}">{{ output_fields[loop.index - 1].capitalize() }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>        
+                </div>
+            </div>
+            <div class="flex-row center">
+                <button id="add_tile" class="plus-minus-btn" aria-label="add field">&#43</button>
+                <button id="remove_tile" class="plus-minus-btn" aria-label="remove field">&#8722</button>
+            </div>
+            <button class="std-btn">Download</button>   
+        </form>
+    </div>
+{% endblock %}

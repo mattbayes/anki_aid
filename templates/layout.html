@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Matt Bayes"> <!-- https://github.com/mattbayes -->
+        <meta name="description" content="Quickly make Japanese Anki cards.">
+        
+        <title>Anki Aid</title>
+        
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='sass/styles.css') }}"/>
+        <script src="../static/scripts/scripts.js"></script>
+        <link rel="icon" href="{{ url_for('static', filename='assets/favicon.svg') }}">
+        <link rel="alternate icon" href="{{ url_for('static', filename='assets/favicon.ico') }}">
+    </head>
+    <body class="grid-container">
+        {% include '/template-parts/header.html' %}
+        
+        <main id="main">
+            {% block main %}{% endblock %}
+        </main>
+        
+        {% include '/template-parts/footer.html' %}
+    </body>
+</html>

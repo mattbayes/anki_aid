@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Contact
+{% endblock %}
+
+{% block main %}
+    <h2 class="title">Contact</h2>
+    <!--Logic to display sucess or failure message (failure not yet implemented)-->
+    {% with messages = get_flashed_messages(category_filter=["success"]) %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="success" role="alert">
+                {{message}}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    {% with messages = get_flashed_messages(category_filter=["error"]) %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="error" role="alert">
+                {{message}}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    
+    <form id="contact-form" class="flex-col" action="/contact" method="post">
+        <!--Email subject-->
+        <select class="contact-item" name="subject" aria-label="query subject" aria-require="true" required autofocus>
+            <option selected disable>Request...</option>
+            {% for request in requests %}
+            <option>{{ requests[loop.index - 1] }}</option>
+            {% endfor %}
+        </select>
+        <!--Email message-->
+        <textarea class="contact-item" name="message" rows="10" cols="10" placeholder="Enter message..." aria-label="message" aria-required="true" required></textarea>
+        <!--Submit to send email-->
+        <button class="std-btn">Send</button>
+    </form>
+{% endblock %}
